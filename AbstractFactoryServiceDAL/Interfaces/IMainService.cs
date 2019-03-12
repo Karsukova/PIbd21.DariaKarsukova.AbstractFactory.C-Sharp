@@ -12,6 +12,6 @@ namespace AbstractFactoryServiceDAL.Interfaces
         void CreateOrder(OrderBindingModel model);
         void TakeOrderInWork(OrderBindingModel model);
         void FinishOrder(OrderBindingModel model);
-        void PayOrder(OrderBindingModel model);
+        void PayOrder(OrderBindingModel model);        void PutComponentOnStorage(StorageMaterialBindingModel model);
     }
 }

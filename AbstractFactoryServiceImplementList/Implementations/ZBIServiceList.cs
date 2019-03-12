@@ -5,6 +5,8 @@ using AbstractFactoryModel;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
+
 
 namespace AbstractFactoryServiceImplementList.Implementations
 {
@@ -17,106 +19,57 @@ namespace AbstractFactoryServiceImplementList.Implementations
         }
         public List<ZBIViewModel> GetList()
         {
-            List<ZBIViewModel> result = new List<ZBIViewModel>();
-            for (int i = 0; i < source.ZBIs.Count; ++i)
+            List<ZBIViewModel> result = source.ZBIs.Select(rec => new ZBIViewModel
             {
-                // требуется дополнительно получить список компонентов для изделия и их количество
-                List<ZBIMaterialViewModel> zbiMaterials = new
-    List<ZBIMaterialViewModel>();
-                for (int j = 0; j < source.ZBIMaterials.Count; ++j)
+                Id = rec.Id,
+                ZBIName = rec.ZBIName,
+                Price = rec.Price,
+                ZBIMaterials = source.ZBIMaterials.Where(recPC => recPC.ZBIId == rec.Id).Select(recPC => new ZBIMaterialViewModel
                 {
-                    if (source.ZBIMaterials[j].ZBIId == source.ZBIs[i].Id)
-                    {
-                        string materialName = string.Empty;
-                        for (int k = 0; k < source.Materials.Count; ++k)
-                        {
-                            if (source.ZBIMaterials[j].MaterialId ==
-                           source.Materials[k].Id)
-                            {
-                                materialName = source.Materials[k].MaterialName;
-                                break;
-                            }
-                        }
-                        zbiMaterials.Add(new ZBIMaterialViewModel
-                        {
-                            Id = source.ZBIMaterials[j].Id,
+                    Id = recPC.Id,
+                    ZBIId = recPC.ZBIId,
+                    MaterialId = recPC.MaterialId,
+                    MaterialName = source.Materials.FirstOrDefault(recC =>
+                   recC.Id == recPC.MaterialId)?.MaterialName,
+                    Count = recPC.Count
+                }).ToList()
+            }).ToList();
 
-                            ZBIId = source.ZBIMaterials[j].ZBIId,
-                            MaterialId = source.ZBIMaterials[j].MaterialId,
-                            MaterialName = materialName,
-                            Count = source.ZBIMaterials[j].Count
-                        });
-                    }
-                }
-                result.Add(new ZBIViewModel
-                {
-                    Id = source.ZBIs[i].Id,
-                    ZBIName = source.ZBIs[i].ZBIName,
-                    Price = source.ZBIs[i].Price,
-                    ZBIMaterials = zbiMaterials
-                });
-            }
             return result;
         }
         public ZBIViewModel GetElement(int id)
         {
-            for (int i = 0; i < source.ZBIs.Count; ++i)
+            ZBI element = source.ZBIs.FirstOrDefault(rec => rec.Id == id);
+            if (element != null)
             {
-                // требуется дополнительно получить список компонентов для изделия и их  количество
-                List<ZBIMaterialViewModel> zbiMaterials = new
-    List<ZBIMaterialViewModel>();
-                for (int j = 0; j < source.ZBIMaterials.Count; ++j)
+                return new ZBIViewModel
                 {
-                    if (source.ZBIMaterials[j].ZBIId == source.ZBIs[i].Id)
+                    Id = element.Id,
+                    ZBIName = element.ZBIName,
+                    Price = element.Price,
+                    ZBIMaterials = source.ZBIMaterials.Where(recPC => recPC.ZBIId == element.Id).Select(recPC => new ZBIMaterialViewModel
                     {
-                        string materialName = string.Empty;
-                        for (int k = 0; k < source.Materials.Count; ++k)
-                        {
-                            if (source.ZBIMaterials[j].MaterialId ==
-                           source.Materials[k].Id)
-                            {
-                                materialName = source.Materials[k].MaterialName;
-                                break;
-                            }
-                        }
-                        zbiMaterials.Add(new ZBIMaterialViewModel
-                        {
-                            Id = source.ZBIMaterials[j].Id,
-                            ZBIId = source.ZBIMaterials[j].ZBIId,
-                            MaterialId = source.ZBIMaterials[j].MaterialId,
-                            MaterialName = materialName,
-                            Count = source.ZBIMaterials[j].Count
-                        });
-                    }
-                }
-                if (source.ZBIs[i].Id == id)
-                {
-                    return new ZBIViewModel
-                    {
-                        Id = source.ZBIs[i].Id,
-                        ZBIName = source.ZBIs[i].ZBIName,
-                        Price = source.ZBIs[i].Price,
-                        ZBIMaterials = zbiMaterials
-                    };
-                }
-            }
+                        Id = recPC.Id,
+                        ZBIId = recPC.ZBIId,
+                        MaterialId = recPC.MaterialId,
+                        MaterialName = source.Materials.FirstOrDefault(recC => recC.Id == recPC.MaterialId)?.MaterialName,
+                        Count = recPC.Count
+                    })
+               .ToList()
+                };
+            }
             throw new Exception("Элемент не найден");
         }
 
         public void AddElement(ZBIBindingModel model)
         {
-            int maxId = 0;
-            for (int i = 0; i < source.ZBIs.Count; ++i)
+            ZBI element = source.ZBIs.FirstOrDefault(rec => rec.ZBIName == model.ZBIName);
+            if (element != null)
             {
-                if (source.ZBIs[i].Id > maxId)
-                {
-                    maxId = source.ZBIs[i].Id;
-                }
-                if (source.ZBIs[i].ZBIName == model.ZBIName)
-                {
-                    throw new Exception("Уже есть изделие с таким названием");
-                }
+                throw new Exception("Уже есть изделие с таким названием");
             }
+            int maxId = source.ZBIs.Count > 0 ? source.ZBIs.Max(rec => rec.Id) :
+           0;
             source.ZBIs.Add(new ZBI
             {
                 Id = maxId + 1,
@@ -124,148 +77,101 @@ namespace AbstractFactoryServiceImplementList.Implementations
                 Price = model.Price
             });
             // компоненты для изделия
-            int maxPCId = 0;
-            for (int i = 0; i < source.ZBIMaterials.Count; ++i)
-            {
-                if (source.ZBIMaterials[i].Id > maxPCId)
-                {
-                    maxPCId = source.ZBIMaterials[i].Id;
-                }
-            }
+            int maxPCId = source.ZBIMaterials.Count > 0 ?
+ source.ZBIMaterials.Max(rec => rec.Id) : 0;
             // убираем дубли по компонентам
-            for (int i = 0; i < model.ZBIMaterials.Count; ++i)
+            var groupComponents = model.ZBIMaterials.GroupBy(rec => rec.MaterialId).Select(rec => new
             {
-                for (int j = 1; j < model.ZBIMaterials.Count; ++j)
-                {
-                    if (model.ZBIMaterials[i].MaterialId ==
-                    model.ZBIMaterials[j].MaterialId)
-                    {
-                        model.ZBIMaterials[i].Count +=
-                        model.ZBIMaterials[j].Count;
-                        model.ZBIMaterials.RemoveAt(j--);
-                    }
-                }
-            }
+                MaterialId = rec.Key,
+                Count = rec.Sum(r => r.Count)
+            });
+
             // добавляем компоненты
-            for (int i = 0; i < model.ZBIMaterials.Count; ++i)
+            foreach (var groupMaterial in groupComponents)
             {
                 source.ZBIMaterials.Add(new ZBIMaterial
                 {
                     Id = ++maxPCId,
                     ZBIId = maxId + 1,
-                    MaterialId = model.ZBIMaterials[i].MaterialId,
-                    Count = model.ZBIMaterials[i].Count
+                    MaterialId = groupMaterial.MaterialId,
+                    Count = groupMaterial.Count
                 });
             }
         }
         public void UpdElement(ZBIBindingModel model)
         {
-            int index = -1;
-            for (int i = 0; i < source.ZBIs.Count; ++i)
+            ZBI element = source.ZBIs.FirstOrDefault(rec => rec.ZBIName ==
+model.ZBIName && rec.Id != model.Id);
+            if (element != null)
             {
-                if (source.ZBIs[i].Id == model.Id)
-                {
-
-                    index = i;
-                }
-                if (source.ZBIs[i].ZBIName == model.ZBIName &&
-                source.ZBIs[i].Id != model.Id)
-                {
-                    throw new Exception("Уже есть изделие с таким названием");
-                }
+                throw new Exception("Уже есть изделие с таким названием");
             }
-            if (index == -1)
+            element = source.ZBIs.FirstOrDefault(rec => rec.Id == model.Id);
+            if (element == null)
             {
                 throw new Exception("Элемент не найден");
             }
-            source.ZBIs[index].ZBIName = model.ZBIName;
-            source.ZBIs[index].Price = model.Price;
-            int maxPCId = 0;
-            for (int i = 0; i < source.ZBIMaterials.Count; ++i)
-            {
-                if (source.ZBIMaterials[i].Id > maxPCId)
-                {
-                    maxPCId = source.ZBIMaterials[i].Id;
-                }
-            }
-            // обновляем существуюущие компоненты
-            for (int i = 0; i < source.ZBIMaterials.Count; ++i)
-            {
-                if (source.ZBIMaterials[i].ZBIId == model.Id)
-                {
-                    bool flag = true;
-                    for (int j = 0; j < model.ZBIMaterials.Count; ++j)
-                    {
-                        // если встретили, то изменяем количество
-                        if (source.ZBIMaterials[i].Id ==
-                       model.ZBIMaterials[j].Id)
-                        {
-                            source.ZBIMaterials[i].Count =
-                           model.ZBIMaterials[j].Count;
-                            flag = false;
-                            break;
-                        }
-                    }
-                    // если не встретили, то удаляем
-                    if (flag)
-                    {
-                        source.ZBIMaterials.RemoveAt(i--);
-                    }
-                }
-            }
-            // новые записи
-            for (int i = 0; i < model.ZBIMaterials.Count; ++i)
-            {
-                if (model.ZBIMaterials[i].Id == 0)
-                {
-                    // ищем дубли
-                    for (int j = 0; j < source.ZBIMaterials.Count; ++j)
-                    {
-                        if (source.ZBIMaterials[j].ZBIId == model.Id &&
-                        source.ZBIMaterials[j].MaterialId ==
-                       model.ZBIMaterials[i].MaterialId)
-                        {
-                            source.ZBIMaterials[j].Count +=
-                           model.ZBIMaterials[i].Count;
-                            model.ZBIMaterials[i].Id =
-                           source.ZBIMaterials[j].Id;
-                            break;
+            element.ZBIName = model.ZBIName;
+            element.Price = model.Price;
+            int maxPCId = source.ZBIMaterials.Count > 0 ?
+           source.ZBIMaterials.Max(rec => rec.Id) : 0;
 
-                        }
-                    }
-                    // если не нашли дубли, то новая запись
-                    if (model.ZBIMaterials[i].Id == 0)
+            // обновляем существуюущие компоненты
+            var compIds = model.ZBIMaterials.Select(rec =>
+ rec.MaterialId).Distinct();
+            var updateMaterials = source.ZBIMaterials.Where(rec => rec.ZBIId ==
+           model.Id && compIds.Contains(rec.MaterialId));
+            foreach (var updateMaterial in updateMaterials)
+            {
+                updateMaterial.Count = model.ZBIMaterials.FirstOrDefault(rec =>
+               rec.Id == updateMaterial.Id).Count;
+            }
+            source.ZBIMaterials.RemoveAll(rec => rec.ZBIId == model.Id &&
+           !compIds.Contains(rec.MaterialId));
+            // новые записи
+            var groupMaterials = model.ZBIMaterials.Where(rec => rec.Id == 0).GroupBy(rec => rec.MaterialId)
+            .Select(rec => new
+            {
+                MaterialId = rec.Key,
+                Count = rec.Sum(r => r.Count)
+            });
+            foreach (var groupMaterial in groupMaterials)
+            {
+                ZBIMaterial elementPC = source.ZBIMaterials.FirstOrDefault(rec
+               => rec.ZBIId == model.Id && rec.MaterialId == groupMaterial.MaterialId);
+                if (elementPC != null)
+                {
+                    elementPC.Count += groupMaterial.Count;
+                }
+                else
+                {
+
+                    source.ZBIMaterials.Add(new ZBIMaterial
                     {
-                        source.ZBIMaterials.Add(new ZBIMaterial
-                        {
-                            Id = ++maxPCId,
-                            ZBIId = model.Id,
-                            MaterialId = model.ZBIMaterials[i].MaterialId,
-                            Count = model.ZBIMaterials[i].Count
-                        });
-                    }
+                        Id = ++maxPCId,
+                        ZBIId = model.Id,
+                        MaterialId = groupMaterial.MaterialId,
+                        Count = groupMaterial.Count
+                    });
                 }
             }
         }
+
         public void DelElement(int id)
         {
-            // удаяем записи по компонентам при удалении изделия
-            for (int i = 0; i < source.ZBIMaterials.Count; ++i)
+            ZBI element = source.ZBIs.FirstOrDefault(rec => rec.Id == id);
+            if (element != null)
             {
-                if (source.ZBIMaterials[i].ZBIId == id)
-                {
-                    source.ZBIMaterials.RemoveAt(i--);
-                }
+                // удаяем записи по компонентам при удалении изделия
+                source.ZBIMaterials.RemoveAll(rec => rec.MaterialId == id);
+                source.ZBIs.Remove(element);
             }
-            for (int i = 0; i < source.ZBIs.Count; ++i)
+            else
             {
-                if (source.ZBIs[i].Id == id)
-                {
-                    source.ZBIs.RemoveAt(i);
-                    return;
-                }
+
+                throw new Exception("Элемент не найден");
             }
-            throw new Exception("Элемент не найден");
         }
-    }
-}
+    }
+}
+

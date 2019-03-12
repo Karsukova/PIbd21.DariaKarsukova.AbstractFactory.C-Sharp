@@ -39,17 +39,22 @@
     <Compile Include="BindingModel\MaterialBindingModel.cs" />
     <Compile Include="BindingModel\OrderBindingModel.cs" />
     <Compile Include="BindingModel\OrderStatusBindingModel.cs" />
+    <Compile Include="BindingModel\StorageBindingModel.cs" />
+    <Compile Include="BindingModel\StorageMaterialBindingModel.cs" />
     <Compile Include="BindingModel\ZBIBindingModel.cs" />
     <Compile Include="BindingModel\ZBIMaterialBindingModel.cs" />
     <Compile Include="Interfaces\ICustomerService.cs" />
     <Compile Include="Interfaces\IMainService.cs" />
     <Compile Include="Interfaces\IMaterialService.cs" />
+    <Compile Include="Interfaces\IStorageService.cs" />
     <Compile Include="Interfaces\IZBIService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\CustomerViewModel.cs" />
     <Compile Include="ViewModel\MaterialViewModel.cs" />
     <Compile Include="ViewModel\OrderStatusViewModel.cs" />
     <Compile Include="ViewModel\OrderViewModel.cs" />
+    <Compile Include="ViewModel\StorageMaterialViewModel.cs" />
+    <Compile Include="ViewModel\StorageViewModel.cs" />
     <Compile Include="ViewModel\ZBIMaterialViewModel.cs" />
     <Compile Include="ViewModel\ZBIViewModel.cs" />
   </ItemGroup>

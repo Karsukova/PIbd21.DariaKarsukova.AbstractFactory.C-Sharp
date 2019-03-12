@@ -4,3 +4,9 @@ C:\Users\Дарья\source\repos\AbstractFactory\AbstractFactoryModel\obj\Debug\
 C:\Users\Дарья\source\repos\AbstractFactory\AbstractFactoryModel\obj\Debug\AbstractFactoryModel.csproj.CoreCompileInputs.cache
 C:\Users\Дарья\source\repos\AbstractFactory\AbstractFactoryModel\obj\Debug\AbstractFactoryModel.dll
 C:\Users\Дарья\source\repos\AbstractFactory\AbstractFactoryModel\obj\Debug\AbstractFactoryModel.pdb
+C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryModel\bin\Debug\AbstractFactoryModel.dll
+C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryModel\bin\Debug\AbstractFactoryModel.pdb
+C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryModel\obj\Debug\AbstractFactoryModel.csprojResolveAssemblyReference.cache
+C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryModel\obj\Debug\AbstractFactoryModel.csproj.CoreCompileInputs.cache
+C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryModel\obj\Debug\AbstractFactoryModel.dll
+C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryModel\obj\Debug\AbstractFactoryModel.pdb

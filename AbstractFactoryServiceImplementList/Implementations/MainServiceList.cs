@@ -5,6 +5,7 @@ using AbstractFactoryModel;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace AbstractFactoryServiceImplementList.Implementations
 {
@@ -17,54 +18,27 @@ namespace AbstractFactoryServiceImplementList.Implementations
         }
         public List<OrderViewModel> GetList()
         {
-            List<OrderViewModel> result = new List<OrderViewModel>();
-            for (int i = 0; i < source.Orders.Count; ++i)
+            List<OrderViewModel> result = source.Orders.Select(rec => new OrderViewModel
             {
-                string customerFIO = string.Empty;
-                for (int j = 0; j < source.Customers.Count; ++j)
-                {
-                    if (source.Customers[j].Id == source.Orders[i].CustomerId)
-                    {
-                        customerFIO = source.Customers[j].CustomerFIO;
-                        break;
-                    }
-                }
-                string zbiName = string.Empty;
-                for (int j = 0; j < source.ZBIs.Count; ++j)
-                {
-                    if (source.ZBIs[j].Id == source.Orders[i].ZBIId)
-                    {
-                        zbiName = source.ZBIs[j].ZBIName;
-                        break;
-                    }
-                }
-                result.Add(new OrderViewModel
-                {
-                    Id = source.Orders[i].Id,
-                    CustomerId = source.Orders[i].CustomerId,
-                    CustomerFIO = customerFIO,
-                    ZBIId = source.Orders[i].ZBIId,
-                    ZBIName = zbiName,
-                    Count = source.Orders[i].Count,
-                    Sum = source.Orders[i].Sum,
-                    DateCreate = source.Orders[i].DateCreate.ToLongDateString(),
-                    DateImplement = source.Orders[i].DateImplement?.ToLongDateString(),
-                    Status = source.Orders[i].Status.ToString()
-               
-                });
-            }
+                Id = rec.Id,
+                CustomerId = rec.CustomerId,
+                ZBIId = rec.ZBIId,
+                DateCreate = rec.DateCreate.ToLongDateString(),
+                DateImplement = rec.DateImplement?.ToLongDateString(),
+                Status = rec.Status.ToString(),
+                Count = rec.Count,
+                Sum = rec.Sum,
+                CustomerFIO = source.Customers.FirstOrDefault(recC => recC.Id ==
+               rec.CustomerId)?.CustomerFIO,
+                ZBIName = source.ZBIs.FirstOrDefault(recP => recP.Id ==
+              rec.ZBIId)?.ZBIName,
+            })
+  .ToList();
             return result;
         }
         public void CreateOrder(OrderBindingModel model)
         {
-            int maxId = 0;
-            for (int i = 0; i < source.Orders.Count; ++i)
-            {
-                if (source.Orders[i].Id > maxId)
-                {
-                    maxId = source.Customers[i].Id;
-                }
-            }
+            int maxId = source.Orders.Count > 0 ? source.Orders.Max(rec => rec.Id) : 0;
             source.Orders.Add(new Order
             {
                 Id = maxId + 1,
@@ -78,68 +52,97 @@ namespace AbstractFactoryServiceImplementList.Implementations
         }
         public void TakeOrderInWork(OrderBindingModel model)
         {
-            int index = -1;
-            for (int i = 0; i < source.Orders.Count; ++i)
-            {
-                if (source.Orders[i].Id == model.Id)
-                {
-                    index = i;
-                    break;
-                }
-            }
-            if (index == -1)
+            Order element = source.Orders.FirstOrDefault(rec => rec.Id == model.Id);
+            if (element == null)
             {
                 throw new Exception("Элемент не найден");
             }
-            if (source.Orders[index].Status != OrderStatus.Принят)
+            if (element.Status != OrderStatus.Принят)
             {
                 throw new Exception("Заказ не в статусе \"Принят\"");
             }
-            source.Orders[index].DateImplement = DateTime.Now;
-            source.Orders[index].Status = OrderStatus.Выполняется;
+            // смотрим по количеству компонентов на складах
+            var zbiMaterials = source.ZBIMaterials.Where(rec => rec.ZBIId
+           == element.ZBIId);
+            foreach (var zbiMaterial in zbiMaterials)
+            {
+                int countOnStocks = source.StorageMaterials
+                .Where(rec => rec.MaterialId ==
+               zbiMaterial.MaterialId)
+                .Sum(rec => rec.Count);
+                if (countOnStocks < zbiMaterial.Count * element.Count)
+                {
+                    var componentName = source.Materials.FirstOrDefault(rec => rec.Id ==
+                   zbiMaterial.MaterialId);
+                    throw new Exception("Не достаточно компонента " +
+                   componentName?.MaterialName + " требуется " + (zbiMaterial.Count * element.Count) +
+                   ", в наличии " + countOnStocks);
+                }
+            }
+            // списываем
+            foreach (var zbiMaterial in zbiMaterials)
+            {
+                int countOnStorages = zbiMaterial.Count * element.Count;
+                var storageMaterials = source.StorageMaterials.Where(rec => rec.MaterialId
+               == zbiMaterial.MaterialId);
+                foreach (var stockComponent in storageMaterials)
+                {
+                    // компонентов на одном слкаде может не хватать
+                    if (stockComponent.Count >= countOnStorages)
+                    {
+                        stockComponent.Count -= countOnStorages;
+                        break;
+                    }
+                    else
+                    {
+                        countOnStorages -= stockComponent.Count;
+                        stockComponent.Count = 0;
+                    }
+                }
+              
+            }
+            element.DateImplement = DateTime.Now;
+            element.Status = OrderStatus.Выполняется;
         }
         public void FinishOrder(OrderBindingModel model)
         {
-            int index = -1;
-            for (int i = 0; i < source.Orders.Count; ++i)
-            {
-                if (source.Customers[i].Id == model.Id)
-                {
-                    index = i;
-                    break;
-                }
-            }
-            if (index == -1)
+            Order element = source.Orders.FirstOrDefault(rec => rec.Id == model.Id);
+            if (element == null)
             {
                 throw new Exception("Элемент не найден");
-                
+
             }
-            if (source.Orders[index].Status != OrderStatus.Выполняется)
+            if (element.Status != OrderStatus.Выполняется)
             {
                 throw new Exception("Заказ не в статусе \"Выполняется\"");
             }
-            source.Orders[index].Status = OrderStatus.Готов;
+            element.Status = OrderStatus.Готов;
         }
         public void PayOrder(OrderBindingModel model)
         {
-            int index = -1;
-            for (int i = 0; i < source.Orders.Count; ++i)
-            {
-                if (source.Customers[i].Id == model.Id)
-                {
-                    index = i;
-                    break;
-                }
-            }
-            if (index == -1)
+            Order element = source.Orders.FirstOrDefault(rec => rec.Id == model.Id);
+            if (element == null)
             {
                 throw new Exception("Элемент не найден");
             }
-            if (source.Orders[index].Status != OrderStatus.Готов)
+            if (element.Status != OrderStatus.Готов)
             {
                 throw new Exception("Заказ не в статусе \"Готов\"");
             }
-            source.Orders[index].Status = OrderStatus.Оплачен;
+            element.Status = OrderStatus.Оплачен;
+        }
+        public void PutComponentOnStorage(StorageMaterialBindingModel model)
+        {
+            Order element = source.Orders.FirstOrDefault(rec => rec.Id == model.Id);
+            if (element == null)
+            {
+                throw new Exception("Элемент не найден");
+            }
+            if (element.Status != OrderStatus.Готов)
+            {
+                throw new Exception("Заказ не в статусе \"Готов\"");
+            }
+            element.Status = OrderStatus.Оплачен;
         }
     }
 }

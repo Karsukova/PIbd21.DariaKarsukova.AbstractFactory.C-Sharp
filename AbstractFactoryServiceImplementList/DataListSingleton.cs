@@ -14,6 +14,8 @@ namespace AbstractFactoryServiceImplementList
         public List<Order> Orders { get; set; }
         public List<ZBI> ZBIs { get; set; }
         public List<ZBIMaterial> ZBIMaterials { get; set; }
+        public List<Storage> Storages { get; set; }
+        public List<StorageMaterial> StorageMaterials { get; set; }
         private DataListSingleton()
         {
             Customers = new List<Customer>();
@@ -21,6 +23,8 @@ namespace AbstractFactoryServiceImplementList
             Orders = new List<Order>();
             ZBIs = new List<ZBI>();
             ZBIMaterials = new List<ZBIMaterial>();
+            Storages = new List<Storage>();
+            StorageMaterials = new List<StorageMaterial>();
         }
         public static DataListSingleton GetInstance()
         {

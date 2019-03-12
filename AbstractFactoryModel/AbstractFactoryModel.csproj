@@ -40,6 +40,8 @@
     <Compile Include="Order.cs" />
     <Compile Include="OrderStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Storage.cs" />
+    <Compile Include="StorageMaterial.cs" />
     <Compile Include="ZBI.cs" />
     <Compile Include="ZBIMaterial.cs" />
   </ItemGroup>

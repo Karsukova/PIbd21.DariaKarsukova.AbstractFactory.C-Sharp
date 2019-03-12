@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AbstractFactoryServiceImplementList</RootNamespace>
     <AssemblyName>AbstractFactoryServiceImplementList</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,6 +40,7 @@
     <Compile Include="Implementations\CustomerServiceList.cs" />
     <Compile Include="Implementations\MainServiceList.cs" />
     <Compile Include="Implementations\MaterialServiceList.cs" />
+    <Compile Include="Implementations\StorageServiceList.cs" />
     <Compile Include="Implementations\ZBIServiceList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
