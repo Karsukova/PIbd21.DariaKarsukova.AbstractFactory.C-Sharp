@@ -51,6 +51,17 @@ namespace AbstractFactoryView
                MessageBoxIcon.Error);
             }
         }
+        private void складыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormStorages>();
+            form.ShowDialog();
+        }
+
+        private void пополнитьСкладToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormPutOnStorage>();
+            form.ShowDialog();
+        }
         private void клиентыToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormCustomers>();
@@ -128,5 +139,7 @@ namespace AbstractFactoryView
         {
             LoadData();
         }
+
+       
     }
 }

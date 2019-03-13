@@ -56,3 +56,6 @@ C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\
 C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\obj\Debug\AbstractFactoryView.csproj.CoreCompileInputs.cache
 C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\obj\Debug\AbstractFactoryView.exe
 C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\obj\Debug\AbstractFactoryView.pdb
+C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\obj\Debug\AbstractFactoryView.FormPutOnStorage.resources
+C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\obj\Debug\AbstractFactoryView.FormStorage.resources
+C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\obj\Debug\AbstractFactoryView.FormStorages.resources

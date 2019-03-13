@@ -66,17 +66,17 @@ namespace AbstractFactoryServiceImplementList.Implementations
            == element.ZBIId);
             foreach (var zbiMaterial in zbiMaterials)
             {
-                int countOnStocks = source.StorageMaterials
+                int countOnStorages = source.StorageMaterials
                 .Where(rec => rec.MaterialId ==
                zbiMaterial.MaterialId)
                 .Sum(rec => rec.Count);
-                if (countOnStocks < zbiMaterial.Count * element.Count)
+                if (countOnStorages < zbiMaterial.Count * element.Count)
                 {
-                    var componentName = source.Materials.FirstOrDefault(rec => rec.Id ==
+                    var materialName = source.Materials.FirstOrDefault(rec => rec.Id ==
                    zbiMaterial.MaterialId);
                     throw new Exception("Не достаточно компонента " +
-                   componentName?.MaterialName + " требуется " + (zbiMaterial.Count * element.Count) +
-                   ", в наличии " + countOnStocks);
+                   materialName?.MaterialName + " требуется " + (zbiMaterial.Count * element.Count) +
+                   ", в наличии " + countOnStorages);
                 }
             }
             // списываем
@@ -85,18 +85,18 @@ namespace AbstractFactoryServiceImplementList.Implementations
                 int countOnStorages = zbiMaterial.Count * element.Count;
                 var storageMaterials = source.StorageMaterials.Where(rec => rec.MaterialId
                == zbiMaterial.MaterialId);
-                foreach (var stockComponent in storageMaterials)
+                foreach (var storageMaterial in storageMaterials)
                 {
                     // компонентов на одном слкаде может не хватать
-                    if (stockComponent.Count >= countOnStorages)
+                    if (storageMaterial.Count >= countOnStorages)
                     {
-                        stockComponent.Count -= countOnStorages;
+                        storageMaterial.Count -= countOnStorages;
                         break;
                     }
                     else
                     {
-                        countOnStorages -= stockComponent.Count;
-                        stockComponent.Count = 0;
+                        countOnStorages -= storageMaterial.Count;
+                        storageMaterial.Count = 0;
                     }
                 }
               
@@ -133,16 +133,24 @@ namespace AbstractFactoryServiceImplementList.Implementations
         }
         public void PutComponentOnStorage(StorageMaterialBindingModel model)
         {
-            Order element = source.Orders.FirstOrDefault(rec => rec.Id == model.Id);
-            if (element == null)
+            StorageMaterial element = source.StorageMaterials.FirstOrDefault(rec =>
+rec.StorageId == model.StorageId && rec.MaterialId == model.MaterialId);
+            if (element != null)
             {
-                throw new Exception("Элемент не найден");
+                element.Count += model.Count;
             }
-            if (element.Status != OrderStatus.Готов)
+            else
             {
-                throw new Exception("Заказ не в статусе \"Готов\"");
-            }
-            element.Status = OrderStatus.Оплачен;
+                int maxId = source.StorageMaterials.Count > 0 ?
+               source.StorageMaterials.Max(rec => rec.Id) : 0;
+                source.StorageMaterials.Add(new StorageMaterial
+                {
+                    Id = ++maxId,
+                    StorageId = model.StorageId,
+                    MaterialId = model.MaterialId,
+                    Count = model.Count
+                });
+            }
         }
     }
 }
