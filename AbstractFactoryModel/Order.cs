@@ -17,5 +17,7 @@ namespace AbstractFactoryModel
         public OrderStatus Status { get; set; }
         public DateTime DateCreate { get; set; }
         public DateTime? DateImplement { get; set; }
+        public virtual Customer Customer { get; set; }
+        public virtual ZBI ZBI { get; set; }
     }
 }

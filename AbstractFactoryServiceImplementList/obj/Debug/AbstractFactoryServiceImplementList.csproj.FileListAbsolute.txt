@@ -18,3 +18,9 @@ C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryServi
 C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryServiceImplementList\obj\Debug\AbstractFactoryServiceImplementList.csproj.CoreCompileInputs.cache
 C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryServiceImplementList\obj\Debug\AbstractFactoryServiceImplementList.dll
 C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryServiceImplementList\obj\Debug\AbstractFactoryServiceImplementList.pdb
+C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryServiceImplementList\bin\Debug\AbstractFactoryServiceImplementList.dll.config
+C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryServiceImplementList\bin\Debug\EntityFramework.dll
+C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryServiceImplementList\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryServiceImplementList\bin\Debug\AbstractFactoryModel.dll.config
+C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryServiceImplementList\bin\Debug\EntityFramework.xml
+C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryServiceImplementList\bin\Debug\EntityFramework.SqlServer.xml
