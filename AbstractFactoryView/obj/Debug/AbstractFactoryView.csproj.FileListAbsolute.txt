@@ -59,3 +59,4 @@ C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\
 C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\obj\Debug\AbstractFactoryView.FormPutOnStorage.resources
 C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\obj\Debug\AbstractFactoryView.FormStorage.resources
 C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\obj\Debug\AbstractFactoryView.FormStorages.resources
+C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\obj\Debug\AbstractFactoryView.FormZBIs.resources

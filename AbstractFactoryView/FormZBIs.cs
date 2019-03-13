@@ -9,17 +9,17 @@ using Unity;
 
 namespace AbstractFactoryView
 {
-    public partial class FormMaterials : Form
+    public partial class FormZBIs : Form
     {
         [Dependency]
         public new IUnityContainer Container { get; set; }
-        private readonly IMaterialService service;
-        public FormMaterials(IMaterialService service)
+        private readonly IZBIService service;
+        public FormZBIs(IZBIService service)
         {
             InitializeComponent();
             this.service = service;
         }
-        private void FormMaterial_Load(object sender, EventArgs e)
+        private void FormZBIs_Load(object sender, EventArgs e)
         {
             LoadData();
         }
@@ -28,7 +28,7 @@ namespace AbstractFactoryView
         {
             try
             {
-                List<MaterialViewModel> list = service.GetList();
+                List<ZBIViewModel> list = service.GetList();
                 if (list != null)
                 {
                     dataGridView.DataSource = list;
@@ -45,7 +45,7 @@ namespace AbstractFactoryView
         }
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormMaterial>();
+            var form = Container.Resolve<FormZBI>();
             if (form.ShowDialog() == DialogResult.OK)
             {
                 LoadData();
@@ -55,7 +55,7 @@ namespace AbstractFactoryView
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
-                var form = Container.Resolve<FormMaterial>();
+                var form = Container.Resolve<FormZBI>();
                 form.Id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 if (form.ShowDialog() == DialogResult.OK)
                 {
@@ -90,9 +90,6 @@ namespace AbstractFactoryView
             LoadData();
         }
 
-        private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+        
     }
 }

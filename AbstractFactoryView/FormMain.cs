@@ -74,7 +74,7 @@ namespace AbstractFactoryView
         }
         private void изделияToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormZBI>();
+            var form = Container.Resolve<FormZBIs>();
             form.ShowDialog();
         }
         private void buttonCreateOrder_Click(object sender, EventArgs e)
