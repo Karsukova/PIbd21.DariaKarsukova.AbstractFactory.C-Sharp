@@ -1,0 +1,10 @@
+C:\Users\Дарья\source\repos\AbstractFactory\AbstractFactoryServiceImplementList\obj\Debug\AbstractFactoryServiceImplementList.csproj.CoreCompileInputs.cache
+C:\Users\Дарья\source\repos\AbstractFactory\AbstractFactoryServiceImplementList\bin\Debug\AbstractFactoryServiceImplementList.dll
+C:\Users\Дарья\source\repos\AbstractFactory\AbstractFactoryServiceImplementList\bin\Debug\AbstractFactoryServiceImplementList.pdb
+C:\Users\Дарья\source\repos\AbstractFactory\AbstractFactoryServiceImplementList\bin\Debug\AbstractFactoryModel.dll
+C:\Users\Дарья\source\repos\AbstractFactory\AbstractFactoryServiceImplementList\bin\Debug\AbstractFactoryServiceDAL.dll
+C:\Users\Дарья\source\repos\AbstractFactory\AbstractFactoryServiceImplementList\bin\Debug\AbstractFactoryModel.pdb
+C:\Users\Дарья\source\repos\AbstractFactory\AbstractFactoryServiceImplementList\bin\Debug\AbstractFactoryServiceDAL.pdb
+C:\Users\Дарья\source\repos\AbstractFactory\AbstractFactoryServiceImplementList\obj\Debug\AbstractFactoryServiceImplementList.csprojResolveAssemblyReference.cache
+C:\Users\Дарья\source\repos\AbstractFactory\AbstractFactoryServiceImplementList\obj\Debug\AbstractFactoryServiceImplementList.dll
+C:\Users\Дарья\source\repos\AbstractFactory\AbstractFactoryServiceImplementList\obj\Debug\AbstractFactoryServiceImplementList.pdb
