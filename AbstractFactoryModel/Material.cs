@@ -12,7 +12,12 @@ namespace AbstractFactoryModel
     public class Material
     {
         public int Id { get; set; }
+        [Required]
         public string MaterialName { get; set; }
+        [ForeignKey("ZBIMaterialId")]
+        public virtual List<ZBIMaterial> ZBIMaterials { get; set; }
+        [ForeignKey("StorageMaterialId")]
+        public virtual List<StorageMaterial> StorageMaterials { get; set; }
     }
 
 }
