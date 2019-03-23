@@ -24,15 +24,15 @@ namespace AbstractFactoryServiceImplementDataBase.Implementations
                 ZBIName = rec.ZBIName,
                 Price = rec.Price,
                 ZBIMaterials = context.ZBIMaterials
-            .Where(recPC => recPC.ZBIId == rec.Id)
-           .Select(recPC => new ZBIMaterialViewModel
-           {
-               Id = recPC.Id,
-               ZBIId = recPC.ZBIId,
-               MaterialId = recPC.MaterialId,
-               MaterialName = recPC.Material.MaterialName,
-               Count = recPC.Count
-           })
+                .Where(recPC => recPC.ZBIId == rec.Id)
+                .Select(recPC => new ZBIMaterialViewModel
+                {
+                    Id = recPC.Id,
+                    ZBIId = recPC.ZBIId,
+                    MaterialId = recPC.MaterialId,
+                    MaterialName = recPC.MaterialName,
+                    Count = recPC.Count
+                })
            .ToList()
             })
             .ToList();
@@ -50,16 +50,16 @@ namespace AbstractFactoryServiceImplementDataBase.Implementations
                     ZBIName = element.ZBIName,
                     Price = element.Price,
                     ZBIMaterials = context.ZBIMaterials
- .Where(recPC => recPC.ZBIId == element.Id)
- .Select(recPC => new ZBIMaterialViewModel
- {
-     Id = recPC.Id,
-     ZBIId = recPC.ZBIId,
-     MaterialId = recPC.MaterialId,
-     MaterialName = recPC.Material.MaterialName,
-     Count = recPC.Count
- })
- .ToList()
+                    .Where(recPC => recPC.ZBIId == element.Id)
+                    .Select(recPC => new ZBIMaterialViewModel
+                    {
+                        Id = recPC.Id,
+                        ZBIId = recPC.ZBIId,
+                        MaterialId = recPC.MaterialId,
+                        MaterialName = recPC.MaterialName,
+                        Count = recPC.Count
+                    })
+    .ToList()
                 };
             }
             throw new Exception("Элемент не найден");
@@ -108,18 +108,18 @@ namespace AbstractFactoryServiceImplementDataBase.Implementations
                 {
                     transaction.Rollback();
                     throw;
-                    
+
                 }
             }
         }
-        public void UpdElement(ProductBindingModel model)
+        public void UpdElement(ZBIBindingModel model)
         {
             using (var transaction = context.Database.BeginTransaction())
             {
                 try
                 {
-                    Product element = context.Products.FirstOrDefault(rec =>
-                   rec.ProductName == model.ProductName && rec.Id != model.Id);
+                    ZBI element = context.ZBIs.FirstOrDefault(rec =>
+                   rec.ZBIName == model.ZBIName && rec.Id != model.Id);
                     if (element != null)
                     {
                         throw new Exception("Уже есть изделие с таким названием");
@@ -129,37 +129,37 @@ namespace AbstractFactoryServiceImplementDataBase.Implementations
                     {
                         throw new Exception("Элемент не найден");
                     }
-                    element.ProductName = model.ProductName;
+                    element.ZBIName = model.ZBIName;
                     element.Price = model.Price;
                     context.SaveChanges();
                     // обновляем существуюущие компоненты
-                    var compIds = model.ProductComponents.Select(rec =>
-                   rec.ComponentId).Distinct();
+                    var compIds = model.ZBIMaterials.Select(rec =>
+                   rec.MaterialId).Distinct();
                     var updateComponents = context.ZBIMaterials.Where(rec =>
-                   rec.ProductId == model.Id && compIds.Contains(rec.ComponentId));
-                    foreach (var updateComponent in updateComponents)
+                   rec.ZBIId == model.Id && compIds.Contains(rec.MaterialId));
+                    foreach (var updateMaterial in updateComponents)
                     {
-                        updateComponent.Count =
-                       model.ProductComponents.FirstOrDefault(rec => rec.Id == updateComponent.Id).Count;
+                        updateMaterial.Count =
+                       model.ZBIMaterials.FirstOrDefault(rec => rec.Id == updateMaterial.Id).Count;
                     }
                     context.SaveChanges();
                     context.ZBIMaterials.RemoveRange(context.ZBIMaterials.Where(rec =>
-                    rec.ProductId == model.Id && !compIds.Contains(rec.ComponentId)));
+                    rec.ZBIId == model.Id && !compIds.Contains(rec.MaterialId)));
                     context.SaveChanges();
                     // новые записи
-                    var groupComponents = model.ProductComponents
+                    var groupMaterials = model.ZBIMaterials
                     .Where(rec => rec.Id == 0)
-                   .GroupBy(rec => rec.ComponentId)
+                   .GroupBy(rec => rec.MaterialId)
                    .Select(rec => new
                    {
                        ComponentId = rec.Key,
                        Count = rec.Sum(r => r.Count)
                    });
-                    foreach (var groupComponent in groupComponents)
+                    foreach (var groupComponent in groupMaterials)
                     {
                         ZBIMaterial elementPC =
-                       context.ZBIMaterials.FirstOrDefault(rec => rec.ProductId == model.Id &&
-                       rec.ComponentId == groupComponent.ComponentId);
+                       context.ZBIMaterials.FirstOrDefault(rec => rec.ZBIId == model.Id &&
+                       rec.MaterialId == groupComponent.ComponentId);
                         if (elementPC != null)
                         {
                             elementPC.Count += groupComponent.Count;
@@ -167,11 +167,11 @@ namespace AbstractFactoryServiceImplementDataBase.Implementations
                         }
                         else
                         {
-                            context.ProductComponents.Add(new ProductComponent
+                            context.ZBIMaterials.Add(new ZBIMaterial
                             {
-                                ProductId = model.Id,
-                                
-                            ComponentId = groupComponent.ComponentId,
+                                ZBIId = model.Id,
+
+                                MaterialId = groupComponent.ComponentId,
                                 Count = groupComponent.Count
                             });
                             context.SaveChanges();
@@ -197,8 +197,8 @@ namespace AbstractFactoryServiceImplementDataBase.Implementations
                     if (element != null)
                     {
                         // удаяем записи по компонентам при удалении изделия
-                        context.ProductComponents.RemoveRange(context.ProductComponents.Where(rec =>
-                        rec.ProductId == id));
+                        context.ZBIMaterials.RemoveRange(context.ZBIMaterials.Where(rec =>
+                        rec.ZBIId == id));
                         context.ZBIs.Remove(element);
                         context.SaveChanges();
                     }

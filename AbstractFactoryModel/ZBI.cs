@@ -16,9 +16,9 @@ namespace AbstractFactoryModel
         public string ZBIName { get; set; }
         [Required]
         public decimal Price { get; set; }
-        [ForeignKey("OrderId")]
+        [ForeignKey("ZBIId")]
         public virtual List<Order> Orders { get; set; }
-        [ForeignKey("ZBIMaterialId")]
+        [ForeignKey("ZBIId")]
         public virtual List<ZBIMaterial> ZBIMaterials { get; set; }
     }
 }

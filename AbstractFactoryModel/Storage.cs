@@ -15,7 +15,7 @@ namespace AbstractFactoryModel
         public int Id { get; set; }
         [Required]
         public string StorageName { get; set; }
-        [ForeignKey("StorageMaterialId")]
+        [ForeignKey("MaterialId")]
         public virtual List<StorageMaterial> StorageMaterials { get; set; }
 
     }

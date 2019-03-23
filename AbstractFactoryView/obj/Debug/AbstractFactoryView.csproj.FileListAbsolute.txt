@@ -32,13 +32,11 @@ C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\
 C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\bin\Debug\AbstractFactoryView.pdb
 C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\bin\Debug\AbstractFactoryModel.dll
 C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\bin\Debug\AbstractFactoryServiceDAL.dll
-C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\bin\Debug\AbstractFactoryServiceImplementList.dll
 C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\bin\Debug\System.ValueTuple.dll
 C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\bin\Debug\Unity.Abstractions.dll
 C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\bin\Debug\Unity.Container.dll
 C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\bin\Debug\AbstractFactoryModel.pdb
 C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\bin\Debug\AbstractFactoryServiceDAL.pdb
-C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\bin\Debug\AbstractFactoryServiceImplementList.pdb
 C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\bin\Debug\System.ValueTuple.xml
 C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\bin\Debug\Unity.Abstractions.pdb
 C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\bin\Debug\Unity.Container.pdb
@@ -61,5 +59,9 @@ C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\
 C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\obj\Debug\AbstractFactoryView.FormStorages.resources
 C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\bin\Debug\EntityFramework.dll
 C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\bin\Debug\AbstractFactoryModel.dll.config
-C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\bin\Debug\AbstractFactoryServiceImplementList.dll.config
 C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\bin\Debug\EntityFramework.xml
+C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\bin\Debug\AbstractFactoryServiceImplementDataBase.dll
+C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\bin\Debug\AbstractFactoryServiceImplementDataBase.pdb
+C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\bin\Debug\AbstractFactoryServiceImplementDataBase.dll.config

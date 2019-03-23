@@ -14,9 +14,9 @@ namespace AbstractFactoryModel
         public int Id { get; set; }
         [Required]
         public string MaterialName { get; set; }
-        [ForeignKey("ZBIMaterialId")]
+        [ForeignKey("MaterialId")]
         public virtual List<ZBIMaterial> ZBIMaterials { get; set; }
-        [ForeignKey("StorageMaterialId")]
+        [ForeignKey("MaterialId")]
         public virtual List<StorageMaterial> StorageMaterials { get; set; }
     }
 

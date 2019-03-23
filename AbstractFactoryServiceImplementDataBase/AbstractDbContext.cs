@@ -6,7 +6,7 @@ using System.Text;
 
 namespace AbstractFactoryServiceImplementDataBase
 {
-    public class AbstractDbContext
+    public class AbstractDbContext : DbContext
     {
 
 

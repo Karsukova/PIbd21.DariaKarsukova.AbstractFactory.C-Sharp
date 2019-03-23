@@ -45,7 +45,19 @@
   <ItemGroup>
     <Compile Include="AbstractDbContext.cs" />
     <Compile Include="Implementations\CustomerServiceDB.cs" />
+    <Compile Include="Implementations\MainServiceDB.cs" />
+    <Compile Include="Implementations\MaterialServiceDB.cs" />
+    <Compile Include="Implementations\StorageSeviceDB.cs" />
     <Compile Include="Implementations\ZBIServiceDB.cs" />
+    <Compile Include="Migrations\201903221749050_FirstMigration.cs" />
+    <Compile Include="Migrations\201903221749050_FirstMigration.Designer.cs">
+      <DependentUpon>201903221749050_FirstMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903230454186_FirstMigration1.cs" />
+    <Compile Include="Migrations\201903230454186_FirstMigration1.Designer.cs">
+      <DependentUpon>201903230454186_FirstMigration1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -61,14 +73,18 @@
       <Project>{a479cd32-4e33-447f-ae08-add1edc77423}</Project>
       <Name>AbstractFactoryServiceImplementList</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AbstractFactoryView\AbstractFactoryView.csproj">
-      <Project>{4f6baef1-d953-439d-abb3-28b859b20f74}</Project>
-      <Name>AbstractFactoryView</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201903221749050_FirstMigration.resx">
+      <DependentUpon>201903221749050_FirstMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903230454186_FirstMigration1.resx">
+      <DependentUpon>201903230454186_FirstMigration1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
