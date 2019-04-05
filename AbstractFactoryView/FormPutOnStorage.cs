@@ -42,7 +42,7 @@ namespace AbstractFactoryView
                     comboBoxMaterial.DataSource = listC;
                     comboBoxMaterial.SelectedItem = null;
                 }
-                List<StorageViewModel> listS = serviceS.GetList();
+                List<StoragesViewModel> listS = serviceS.GetList();
                 if (listS != null)
                 {
 

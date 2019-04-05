@@ -16,10 +16,10 @@ namespace AbstractFactoryServiceImplementList.Implementations
         {
             source = DataListSingleton.GetInstance();
         }
-        public List<StorageViewModel> GetList()
+        public List<StoragesViewModel> GetList()
         {
-            List<StorageViewModel> result = source.Storages
-            .Select(rec => new StorageViewModel
+            List<StoragesViewModel> result = source.Storages
+            .Select(rec => new StoragesViewModel
             {
                 Id = rec.Id,
                 StorageName = rec.StorageName,
@@ -40,12 +40,12 @@ namespace AbstractFactoryServiceImplementList.Implementations
             .ToList();
             return result;
         }
-        public StorageViewModel GetElement(int id)
+        public StoragesViewModel GetElement(int id)
         {
             Storage element = source.Storages.FirstOrDefault(rec => rec.Id == id);
             if (element != null)
             {
-                return new StorageViewModel
+                return new StoragesViewModel
                 {
                     Id = element.Id,
                     StorageName = element.StorageName,

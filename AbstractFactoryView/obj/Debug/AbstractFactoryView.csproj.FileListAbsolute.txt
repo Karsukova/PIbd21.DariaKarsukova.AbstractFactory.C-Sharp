@@ -65,3 +65,4 @@ C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\
 C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\bin\Debug\AbstractFactoryServiceImplementDataBase.dll
 C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\bin\Debug\AbstractFactoryServiceImplementDataBase.pdb
 C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\bin\Debug\AbstractFactoryServiceImplementDataBase.dll.config
+C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryView\obj\Debug\AbstractFactoryView.FormStoragesLoad.resources

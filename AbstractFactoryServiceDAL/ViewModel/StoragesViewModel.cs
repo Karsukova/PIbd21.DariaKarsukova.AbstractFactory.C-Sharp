@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AbstractFactoryServiceDAL.ViewModel
 {
-    public class StorageViewModel
+    public class StoragesViewModel
     {
         public int Id { get; set; }
         public string StorageName { get; set; }

@@ -15,3 +15,7 @@ C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryModel
 C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryModel\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryModel\bin\Debug\EntityFramework.xml
 C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryModel\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryModel\bin\Debug\itextsharp.dll
+C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryModel\bin\Debug\itextsharp.xml
+C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryModel\bin\Debug\AbstractFactoryServiceDAL.dll
+C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryModel\bin\Debug\AbstractFactoryServiceDAL.pdb

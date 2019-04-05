@@ -45,12 +45,12 @@ namespace AbstractFactoryServiceImplementDataBase.Implementations
             }
         }
 
-        public StorageViewModel GetElement(int id)
+        public StoragesViewModel GetElement(int id)
         {
             Storage element = context.Storages.FirstOrDefault(rec => rec.Id == id);
             if (element != null)
             {
-                return new StorageViewModel
+                return new StoragesViewModel
                 {
                     Id = element.Id,
                     StorageName = element.StorageName
@@ -59,9 +59,9 @@ namespace AbstractFactoryServiceImplementDataBase.Implementations
             throw new Exception("Элемент не найден");
         }
 
-        public List<StorageViewModel> GetList()
+        public List<StoragesViewModel> GetList()
         {
-            List<StorageViewModel> result = context.Storages.Select(rec => new StorageViewModel
+            List<StoragesViewModel> result = context.Storages.Select(rec => new StoragesViewModel
             {
                 Id = rec.Id,
                 StorageName = rec.StorageName

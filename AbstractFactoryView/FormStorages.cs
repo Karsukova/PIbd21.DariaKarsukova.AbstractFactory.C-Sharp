@@ -34,7 +34,7 @@ namespace AbstractFactoryView
         {
             try
             {
-                List<StorageViewModel> list = service.GetList();
+                List<StoragesViewModel> list = service.GetList();
                 if (list != null)
                 {
                     dataGridView.DataSource = list;

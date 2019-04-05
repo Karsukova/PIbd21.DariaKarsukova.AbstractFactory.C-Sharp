@@ -33,7 +33,7 @@ namespace AbstractFactoryView
             {
                 try
                 {
-                    StorageViewModel view = service.GetElement(id.Value);
+                    StoragesViewModel view = service.GetElement(id.Value);
                     if (view != null)
                     {
 
