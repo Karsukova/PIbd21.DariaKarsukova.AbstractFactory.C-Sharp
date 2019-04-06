@@ -21,7 +21,7 @@ namespace AbstractFactoryView
         [Dependency]
         public new IUnityContainer Container { get; set; }
         private readonly IReptService service;
-        public FormStoragesLoad()
+        public FormStoragesLoad(IReptService service)
         {
             InitializeComponent();
             this.service = service;

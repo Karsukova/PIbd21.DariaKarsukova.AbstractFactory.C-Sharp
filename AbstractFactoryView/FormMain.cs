@@ -23,10 +23,12 @@ namespace AbstractFactoryView
         [Dependency]
         public new IUnityContainer Container { get; set; }
         public readonly IMainService service;
-        public FormMain(IMainService service)
+        public readonly IReptService Reptservice;
+        public FormMain(IMainService service, IReptService Reptservice)
         {
             InitializeComponent();
             this.service = service;
+            this.Reptservice = Reptservice;
         }
         private void LoadData()
         {
@@ -140,6 +142,41 @@ namespace AbstractFactoryView
             LoadData();
         }
 
-       
+        private void прайсИзделийToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog
+            {
+                Filter = "doc|*.doc|docx|*.docx"
+            };
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    Reptservice.SaveZBIPrice(new ReptBindingModel
+                    {
+                        FileName = sfd.FileName
+                    });
+                    MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
+                   MessageBoxIcon.Error);
+                }
+            }
+        }
+        private void загруженностьСкладовToolStripMenuItem_Click(object sender, EventArgs
+       e)
+        {
+            var form = Container.Resolve<FormStoragesLoad>();
+           
+        form.ShowDialog();
+        }
+        private void заказыКлиентовToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormCustomerOrders>();
+            form.ShowDialog();
+        }
     }
 }
