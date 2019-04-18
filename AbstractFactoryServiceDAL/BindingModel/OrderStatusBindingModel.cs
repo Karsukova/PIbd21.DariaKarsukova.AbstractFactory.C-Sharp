@@ -1,9 +1,10 @@
-﻿using System;
+﻿using System.Runtime.Serialization;
+using System;
 using System.Collections.Generic;
 using System.Text;
-
 namespace AbstractFactoryServiceDAL.BindingModel
 {
+    [DataContract]
     public enum OrderStatusBindingModel
     {
 
