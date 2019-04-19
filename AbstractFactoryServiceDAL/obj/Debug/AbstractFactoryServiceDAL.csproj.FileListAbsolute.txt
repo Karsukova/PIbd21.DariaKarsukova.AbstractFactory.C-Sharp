@@ -68,3 +68,4 @@ C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryServi
 C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryServiceDAL\bin\Debug\zh-CHT\Microsoft.ReportViewer.WinForms.resources.dll
 C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryServiceDAL\obj\Debug\AbstractFactoryServiceDAL.Properties.Resources.resources
 C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryServiceDAL\obj\Debug\AbstractFactoryServiceDAL.csproj.GenerateResource.Cache
+C:\Users\Дарья\Desktop\учеба\ТП\AbstractFactory\AbstractFactoryServiceDAL\obj\Debug\AbstractFactoryServiceDAL.csprojResolveAssemblyReference.cache
